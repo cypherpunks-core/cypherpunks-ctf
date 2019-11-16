@@ -2,6 +2,7 @@
   "name": "react-box",
   "version": "0.6.0",
   "private": true,
+  "homepage": "https://stillfantastic.github.io/cypherpunks-ctf", 
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
