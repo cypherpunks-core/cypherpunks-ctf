@@ -1,4 +1,4 @@
-# Ethernaut
+# Cypherpunks CTF
 
 <p>Cypherpunks CTF is a Web3/Solidity based wargame inspired in <a href="https://ethernaut.openzeppelin.com" target="_blank" rel="noopener noreferred">Ethernaut</a>, to be played in the Ethereum Virtual Machine. Each level is a smart contract that needs to be 'hacked'.</p>
 
@@ -8,7 +8,7 @@
 
 1. Install all the dependencies
 ```
-git clone https://github.com/StillFantastic/Crosslink-Ethernaut.git
+https://github.com/cypherpunks-core/cypherpunks-ctf.git
 npm install
 ```
 2. Compile contracts and get static frontend files
@@ -17,7 +17,7 @@ npm run deploy:ui
 ```
 
 ### Coontributing
-See `contributing.md` on the repository for information about how to contribute.
+see [contributing.md](https://github.com/cypherpunks-core/cypherpunks-ctf/blob/dev/contributing.md) on the repository for information about how to contribute.
 
 #### Example level development
 
