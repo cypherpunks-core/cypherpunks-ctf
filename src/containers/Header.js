@@ -31,8 +31,8 @@ class Header extends React.Component {
             </button>
             <div className="navbar-brand" style={{paddingTop: '0', paddingBottom: '0', paddingLeft: '25px', lineHeight: '49px'}}>
               <span>
-                <a href="https://cypherpunks-core.github.io" target="_blank" rel="noopener noreferred">
-                  <img style={{width: '30px', height: '30px'}} src='../../imgs/cypherpunks-logo.png' alt=''/>
+                <a href={constants.PATH_ROOT} target="_blank" rel="noopener noreferred">
+                  <img style={{width: '30px', height: '30px'}} src={`${constants.PATH_ROOT}/imgs/cypherpunks-logo.png`} alt=''/>
                 </a>
               </span>
               &nbsp;

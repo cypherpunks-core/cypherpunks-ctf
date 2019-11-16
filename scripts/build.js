@@ -171,7 +171,7 @@ function build(previousSizeMap) {
         console.log('    ' + chalk.dim('// ...'));
         console.log('    ' + chalk.yellow('"scripts"') + ': {');
         console.log('      ' + chalk.dim('// ...'));
-        console.log('      ' + chalk.yellow('"gamedata"') + ': ' + chalk.yellow('"npm run build&&gh-pages -d build"'));
+        console.log('      ' + chalk.yellow('"gamedata"') + ': ' + chalk.yellow('"npm run build&&gh-pages -d build_webpack"'));
         console.log('    }');
         console.log();
         console.log('Then run:');
