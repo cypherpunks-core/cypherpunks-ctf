@@ -38,7 +38,7 @@ export const VERSION = require('../package.json').version
 export const STORAGE_PLAYER_DATA_KEY = `ethernaut_player_data_${VERSION}_`
 
 // Paths
-export const PATH_ROOT = '/cypherpunks-ctf/'
+export const PATH_ROOT = DEBUG ? '/' : '/cypherpunks-ctf/'
 export const PATH_NOT_FOUND = '/404'
 export const PATH_HELP = `${PATH_ROOT}help`
 export const PATH_LEVEL_ROOT = `${PATH_ROOT}level/`

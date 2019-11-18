@@ -32,7 +32,7 @@ class Header extends React.Component {
             <div className="navbar-brand" style={{paddingTop: '0', paddingBottom: '0', paddingLeft: '25px', lineHeight: '49px'}}>
               <span>
                 <a href={constants.PATH_ROOT} target="_blank" rel="noopener noreferred">
-                  <img style={{width: '30px', height: '30px'}} src={`${constants.PATH_ROOT}/imgs/cypherpunks-logo.png`} alt=''/>
+                  <img style={{width: '30px', height: '30px'}} src={`${constants.PATH_ROOT}imgs/cypherpunks-logo.png`} alt=''/>
                 </a>
               </span>
               &nbsp;
