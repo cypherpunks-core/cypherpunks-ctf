@@ -30,7 +30,7 @@ class ConsoleDetect extends React.Component {
     return (
       <span
         style={{"color" : "#ff9797",
-        "font-weight" : "bold",
+        "fontWeight" : "bold",
         fontsize : '12px',
         padding : '8px',
         cursor : 'pointer'}}
