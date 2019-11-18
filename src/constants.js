@@ -25,7 +25,7 @@ export const Web3 = require("web3")
 
 // Misc
 export const CLEAR_CONSOLE = !DEBUG
-export const GOOGLE_ANALYTICS_ID = 'UA-85043059-4'
+export const GOOGLE_ANALYTICS_ID = 'UA-152755185-1'
 
 // Owner addresses
 export const ADDRESSES = {
