@@ -1,5 +1,5 @@
-import * as ethutil from '../utils/ethutil'
-import * as actions from '../actions'
+import * as ethutil from "../utils/ethutil"
+import * as actions from "../actions"
 
 export default store => next => action => {
   if(action.type !== actions.LOAD_LEVEL_INSTANCE) return next(action)
@@ -21,15 +21,15 @@ export default store => next => action => {
 
   // Get a new instance address
   if(!instanceAddress && !action.reuse) {
-    console.asyncInfo(`@good Requesting new instance from level...`)
+    console.asyncInfo("@good Requesting new instance from level...")
 
     const showErr = function(error) {
-      console.error('@bad Unable to retrieve level instance! Please check gas amount and try again.', error || '')
+      console.error("@bad Unable to retrieve level instance! Please check gas amount and try again.", error || "")
     }
 
     // const estimate = await state.contracts.ethernaut.getLevelInstance.estimateGas(action.level.deployedAddress)
     const estimate = parseInt(action.level.instanceGas, 10) || 2000000
-    const deployFunds = state.network.web3.toWei(parseInt(action.level.deployFunds, 10), 'ether')
+    const deployFunds = state.network.web3.toWei(parseInt(action.level.deployFunds, 10), "ether")
     state.contracts.ethernaut.createLevelInstance(action.level.deployedAddress, {
       gas: estimate,
       gasPrice: 2 * state.network.gasPrice,
@@ -38,13 +38,13 @@ export default store => next => action => {
     })
       .then(tx => {
         console.dir(tx)
-        instanceAddress = tx.logs[0].args.instance;
+        instanceAddress = tx.logs[0].args.instance
         if(tx.logs.length > 0) {
           action.instanceAddress = instanceAddress
           store.dispatch(action)
         }
         else {
-          showErr('tx contains no logs')
+          showErr("tx contains no logs")
         }
       })
       .catch(error => {
@@ -65,16 +65,16 @@ export default store => next => action => {
   )
   Instance.at(instanceAddress)
     .then(instance => {
-      window.instance = instance.address;
-      window.contract = instance;
-      action.instance = instance;
-      next(action);
+      window.instance = instance.address
+      window.contract = instance
+      action.instance = instance
+      next(action)
     })
     .catch(err => {
-      console.log(`Error: ${err}, retrying...`);
+      console.log(`Error: ${err}, retrying...`)
       setTimeout(() => {
-        store.dispatch(action);
-      }, 1000);
+        store.dispatch(action)
+      }, 1000)
     })
 }
 
@@ -83,5 +83,5 @@ export default store => next => action => {
 // ----------------------------------
 
 function withoutExtension(str) {
-  return str.split('.')[0]
+  return str.split(".")[0]
 }

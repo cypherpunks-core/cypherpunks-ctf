@@ -1,6 +1,6 @@
-import * as actions from '../actions'
+import * as actions from "../actions"
 
-let queuedAction;
+let queuedAction
 
 export default store => next => action => {
   if(action.type !== actions.COLLECT_STATS) {
@@ -28,7 +28,7 @@ export default store => next => action => {
     filter: {},
     range: {
       fromBlock: 0,
-      toBlock: state.network.blockNum || 'latest'
+      toBlock: state.network.blockNum || "latest"
     }
   }
   // console.log(`query`, query)

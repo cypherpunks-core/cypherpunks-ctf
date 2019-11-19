@@ -1,6 +1,6 @@
-import React from 'react'
-import loadText from '../utils/textloader'
-import ReactMarkdown from 'react-markdown'
+import React from "react"
+import loadText from "../utils/textloader"
+import ReactMarkdown from "react-markdown"
 
 class Markdown extends React.Component {
 
@@ -37,7 +37,7 @@ class Markdown extends React.Component {
   }
 
   render() {
-    const source = this.state.source;
+    const source = this.state.source
     return <div>{ source && <ReactMarkdown source={source}/> }</div>
   }
 }

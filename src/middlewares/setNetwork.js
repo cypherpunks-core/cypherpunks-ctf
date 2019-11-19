@@ -1,5 +1,5 @@
-import * as actions from '../actions'
-import * as constants from '../constants'
+import * as actions from "../actions"
+import * as constants from "../constants"
 
 let wasOnWrongNetwork = false
 

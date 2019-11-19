@@ -1,13 +1,13 @@
-const FalloutFactory = artifacts.require('./levels/FalloutFactory.sol')
-const Fallout = artifacts.require('./attacks/Fallout.sol')
+const FalloutFactory = artifacts.require("./levels/FalloutFactory.sol")
+const Fallout = artifacts.require("./attacks/Fallout.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('Fallout', function(accounts) {
+contract("Fallout", function(accounts) {
 
   let ethernaut
   let level
@@ -15,12 +15,12 @@ contract('Fallout', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await FalloutFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
 
     const instance = await utils.createLevelInstance(
       ethernaut, level.address, player, Fallout,
@@ -40,6 +40,6 @@ contract('Fallout', function(accounts) {
       player
     )
     assert.equal(ethCompleted, true)
-  });
+  })
 
-});
+})

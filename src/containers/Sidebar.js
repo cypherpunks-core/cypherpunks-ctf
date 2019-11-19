@@ -1,16 +1,16 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { Link } from 'react-router'
-import * as constants from '../constants'
-import moment from 'moment'
+import React from "react"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import { Link } from "react-router"
+import * as constants from "../constants"
+import moment from "moment"
 
 class Sidebar extends React.Component {
   render() {
 
     return (
       <div style={{
-        padding: '15px 10px'
+        padding: "15px 10px"
       }}>
 
         {/* TITLE */}
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
             let linkStyle = {}
             if(this.props.activeLevel) {
               if(this.props.activeLevel.deployedAddress === level.deployedAddress) {
-                linkStyle.textDecoration = 'underline'
+                linkStyle.textDecoration = "underline"
               }
             }
 
@@ -39,18 +39,18 @@ class Sidebar extends React.Component {
               <div key={idx}>
                 <Link to={`${constants.PATH_LEVEL_ROOT}${level.deployedAddress}`}>
                   <span style={linkStyle}>
-                    {`${idx}. ${level.name}${levelComplete ? ' ✔' : ''}`}
+                    {`${idx}. ${level.name}${levelComplete ? " ✔" : ""}`}
                   </span>
                   { ago < 1 &&
-                    <img style={{width: '20px', height: '20px'}} src='../../imgs/new.png' alt='new'/>
+                    <img style={{width: "20px", height: "20px"}} src='../../imgs/new.png' alt='new'/>
                   }
                 </Link>
               </div>
-            );
+            )
           })}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -59,15 +59,15 @@ function mapStateToProps(state) {
     levels: state.gamedata.levels,
     player: state.player,
     activeLevel: state.gamedata.activeLevel
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-  }, dispatch);
+  }, dispatch)
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Sidebar);
+)(Sidebar)

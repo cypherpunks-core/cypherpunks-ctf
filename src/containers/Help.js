@@ -1,12 +1,12 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import MarkdownComponent from '../components/Markdown'
+import React from "react"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import MarkdownComponent from "../components/Markdown"
 
 class Help extends React.Component {
   render() {
     let file = null
-    try { file = require(`../../gamedata/descriptions/pages/help.md`) } catch(e){}
+    file = require("../../gamedata/descriptions/pages/help.md")
     return (
       <div className="page-container">
         <h2 className="title">Challenge Help</h2>

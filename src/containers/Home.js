@@ -1,7 +1,7 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import * as constants from '../constants'
+import React from "react"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import * as constants from "../constants"
 
 class Home extends React.Component {
 
@@ -27,9 +27,9 @@ class Home extends React.Component {
       <div
         className="row"
         style={{
-        paddingLeft: '40px',
-        paddingRight: '40px',
-      }}>
+          paddingLeft: "40px",
+          paddingRight: "40px",
+        }}>
 
         <div className="col-sm-12">
 
@@ -52,7 +52,7 @@ class Home extends React.Component {
           </p>
           {/* INFO */}
           <button
-            style={{marginTop: '10px'}}
+            style={{marginTop: "10px"}}
             className="btn btn-primary"
             onClick={() => this.navigateToFirstIncompleteLevel()}
           >
@@ -69,16 +69,16 @@ function mapStateToProps(state) {
   return {
     levels: state.gamedata.levels,
     completedLevels: state.player.completedLevels
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
 
-  }, dispatch);
+  }, dispatch)
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Home)

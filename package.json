@@ -9,7 +9,11 @@
     "test": "truffle test",
     "compile:contracts": "rm -rf build && npx truffle compile",
     "deploy:contracts": "npm run compile:contracts && node scripts/deploy_contracts.js",
-    "deploy:ui": "npm rum compile:contracts && npm run build"
+    "deploy:ui": "npm rum compile:contracts && npm run build",
+    "lintJson": "node scripts/linter.js",
+    "lintJavascript": "eslint --fix .",
+    "lintSolidity": "prettier --write '**/*.sol' && solhint '**/*.sol'",
+    "lint": "npm run lintJson && npm run lintJavascript && npm run lintSolidity"
   },
   "devDependencies": {
     "autoprefixer": "6.5.1",

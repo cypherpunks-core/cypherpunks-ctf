@@ -1,4 +1,4 @@
-import * as actions from '../actions'
+import * as actions from "../actions"
 
 export default store => next => async action => {
   if(action.type !== actions.SUBMIT_LEVEL_INSTANCE) return next(action)
@@ -13,7 +13,7 @@ export default store => next => async action => {
     !state.network.gasPrice
   ) return next(action)
 
-  console.asyncInfo(`@good Submitting level instance...`)
+  console.asyncInfo("@good Submitting level instance...")
 
   let completed = await submitLevelInstance(
     state.contracts.ethernaut,
@@ -23,7 +23,7 @@ export default store => next => async action => {
     state.network.gasPrice
   )
   if(completed) {
-    console.victory(`@good Well done`, `You have completed this level!!!`)
+    console.victory("@good Well done", "You have completed this level!!!")
   }
   else {
     console.error(`
@@ -45,19 +45,19 @@ async function submitLevelInstance(ethernaut, levelAddress, instanceAddress, pla
     //   estimate = await ethernaut.submitLevelInstance.estimateGas(instanceAddress, data)
     //   data.gas = estimate;
     // } catch(e) {}
-    const tx = await ethernaut.submitLevelInstance(instanceAddress, data);
+    const tx = await ethernaut.submitLevelInstance(instanceAddress, data)
     if(tx.logs.length === 0) resolve(false)
     else {
       if(tx.logs.length === 0) resolve(false)
       else {
-        const log = tx.logs[0].args;
-        const ethLevelAddress = log.level;
-        const ethPlayer = log.player;
+        const log = tx.logs[0].args
+        const ethLevelAddress = log.level
+        const ethPlayer = log.player
         if(player === ethPlayer && levelAddress === ethLevelAddress) {
           resolve(true)
         }
         else resolve(false)
       }
     }
-  });
+  })
 }

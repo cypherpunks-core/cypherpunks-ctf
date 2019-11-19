@@ -1,6 +1,6 @@
-const path = require('path')
-const fs = require('fs')
-const chalk = require('chalk')
+const path = require("path")
+const fs = require("fs")
+const chalk = require("chalk")
 
 const ignore = [/node_modules/]
 let jsonCount = 0
@@ -25,7 +25,7 @@ function fromDir (startPath, filter, callback) {
     if (shouldIgnore)
       continue
 
-    const stat = fs.lstatSync(filename);
+    const stat = fs.lstatSync(filename)
     if (stat.isDirectory()) {
       fromDir(filename, filter, callback)
     } else if (filter.test(filename)) {
@@ -41,7 +41,7 @@ function jsonChecker (filename) {
   try {
     const jsonContent = JSON.parse(content)
     // Indent with 2 spaces
-    const jsonObj = JSON.stringify(jsonContent, null, 2);
+    const jsonObj = JSON.stringify(jsonContent, null, 2)
     fs.writeFileSync(filename, jsonObj)
     console.log(chalk.green("Pass!"))
     jsonPass += 1
@@ -50,7 +50,7 @@ function jsonChecker (filename) {
   }
 }
 
-fromDir('.', /\.json$/, jsonChecker)
+fromDir(".", /\.json$/, jsonChecker)
 
 console.log("\nTotal:", jsonCount)
 console.log(chalk.green("Pass: " + jsonPass))

@@ -1,5 +1,5 @@
-import React from 'react'
-import DevToolsDetect from 'devtools-detect'
+import React from "react"
+import DevToolsDetect from "devtools-detect"
 
 class ConsoleDetect extends React.Component {
 
@@ -11,7 +11,7 @@ class ConsoleDetect extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', () => { this.checkConsole() })
+    window.addEventListener("resize", () => { this.checkConsole() })
     this.checkConsole()
     setInterval(() => this.checkConsole(), 500)
   }
@@ -30,10 +30,10 @@ class ConsoleDetect extends React.Component {
     return (
       <span
         style={{"color" : "#ff9797",
-        "fontWeight" : "bold",
-        fontsize : '12px',
-        padding : '8px',
-        cursor : 'pointer'}}
+          "fontWeight" : "bold",
+          fontsize : "12px",
+          padding : "8px",
+          cursor : "pointer"}}
       >
         OPEN YOUR CONSOLE TO PLAY
       </span>

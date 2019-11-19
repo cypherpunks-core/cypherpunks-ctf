@@ -1,8 +1,8 @@
-import React from 'react'
-import Highlight from 'react-highlight'
-import loadText from '../utils/textloader'
+import React from "react"
+import Highlight from "react-highlight"
+import loadText from "../utils/textloader"
 
-import 'highlight.js/styles/atom-one-dark.css'
+import "highlight.js/styles/atom-one-dark.css"
 
 class Code extends React.Component {
 

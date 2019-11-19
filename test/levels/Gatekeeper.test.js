@@ -1,17 +1,17 @@
-const GatekeeperOneFactory = artifacts.require('./levels/GatekeeperOneFactory.sol')
-const GatekeeperTwoFactory = artifacts.require('./levels/GatekeeperTwoFactory.sol')
-const GatekeeperOne = artifacts.require('./levels/GatekeeperOne.sol')
-const GatekeeperTwo = artifacts.require('./levels/GatekeeperTwo.sol')
-const GatekeeperOneAttack = artifacts.require('./attacks/GatekeeperOneAttack.sol')
-const GatekeeperTwoAttack = artifacts.require('./attacks/GatekeeperTwoAttack.sol')
+const GatekeeperOneFactory = artifacts.require("./levels/GatekeeperOneFactory.sol")
+const GatekeeperTwoFactory = artifacts.require("./levels/GatekeeperTwoFactory.sol")
+const GatekeeperOne = artifacts.require("./levels/GatekeeperOne.sol")
+const GatekeeperTwo = artifacts.require("./levels/GatekeeperTwo.sol")
+const GatekeeperOneAttack = artifacts.require("./attacks/GatekeeperOneAttack.sol")
+const GatekeeperTwoAttack = artifacts.require("./attacks/GatekeeperTwoAttack.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('GatekeeperOne', function(accounts) {
+contract("GatekeeperOne", function(accounts) {
 
   let ethernaut
   let level
@@ -19,12 +19,12 @@ contract('GatekeeperOne', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await GatekeeperOneFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should fail if the player didnt solve the level', async function() {
+  it("should fail if the player didnt solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, GatekeeperOne)
     const completed = await utils.submitLevelInstance(
       ethernaut,
@@ -34,9 +34,9 @@ contract('GatekeeperOne', function(accounts) {
     )
 
     assert.isFalse(completed)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, GatekeeperOne)
 
     const attacker = await GatekeeperOneAttack.new(instance.address, {
@@ -51,11 +51,11 @@ contract('GatekeeperOne', function(accounts) {
     )
 
     assert.isTrue(completed)
-  });
+  })
 
-});
+})
 
-contract('GatekeeperTwo', function(accounts) {
+contract("GatekeeperTwo", function(accounts) {
 
   let ethernaut
   let level
@@ -63,12 +63,12 @@ contract('GatekeeperTwo', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await GatekeeperTwoFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should fail if the player didnt solve the level', async function() {
+  it("should fail if the player didnt solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, GatekeeperTwo)
     const completed = await utils.submitLevelInstance(
       ethernaut,
@@ -78,9 +78,9 @@ contract('GatekeeperTwo', function(accounts) {
     )
 
     assert.isFalse(completed)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, GatekeeperTwo)
 
     const attacker = await GatekeeperTwoAttack.new(instance.address, {
@@ -96,6 +96,6 @@ contract('GatekeeperTwo', function(accounts) {
 
     assert.isTrue(completed)
 
-  });
+  })
 
-});
+})

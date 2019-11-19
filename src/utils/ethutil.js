@@ -1,25 +1,25 @@
-import TruffleContract from 'truffle-contract'
-import * as ethjs from 'ethereumjs-util'
+import TruffleContract from "truffle-contract"
+import * as ethjs from "ethereumjs-util"
 
-let web3;
+let web3
 export function setWeb3(_web3) {
-  web3 = _web3;
+  web3 = _web3
 }
 
 export function getTruffleContract(jsonABI, defaults = {}) {
-  const truffleContract = TruffleContract(jsonABI);
-  if(!defaults.gasPrice) defaults.gasPrice = 20000000000;
+  const truffleContract = TruffleContract(jsonABI)
+  if(!defaults.gasPrice) defaults.gasPrice = 20000000000
   // if(!defaults.gas) defaults.gas = 200000;
-  truffleContract.defaults(defaults);
-  truffleContract.setProvider(web3.currentProvider);
-  return truffleContract;
+  truffleContract.defaults(defaults)
+  truffleContract.setProvider(web3.currentProvider)
+  return truffleContract
 }
 
 export function getBalance(address) {
   return new Promise(function(resolve, reject) {
     web3.eth.getBalance(address, function(error, result) {
       if(error) reject(error)
-      else resolve(web3.fromWei(result.toNumber(), 'ether'))
+      else resolve(web3.fromWei(result.toNumber(), "ether"))
     })
   })
 }
@@ -28,9 +28,9 @@ export function getBlockNumber() {
   return new Promise((resolve, reject) => {
     web3.eth.getBlockNumber((err, blockNumber) => {
       if(err) reject(err)
-      resolve(blockNumber);
-    });
-  });
+      resolve(blockNumber)
+    })
+  })
 }
 
 export function sendTransaction(options) {
@@ -45,18 +45,18 @@ export function sendTransaction(options) {
 export function getNetworkId() {
   return new Promise((resolve, reject) => {
     web3.version.getNetwork((err, netId) => {
-      if(err) reject();
-      else resolve(netId);
-    });
-  });
+      if(err) reject()
+      else resolve(netId)
+    })
+  })
 }
 
 export function toWei(ether) {
-  return web3.toWei(ether, 'ether')
+  return web3.toWei(ether, "ether")
 }
 
 export function fromWei(wei) {
-  return web3.fromWei(wei, 'ether')
+  return web3.fromWei(wei, "ether")
 }
 
 export function watchAccountChanges(callback, lastKnownAccount) {
@@ -67,7 +67,7 @@ export function watchAccountChanges(callback, lastKnownAccount) {
       if(newAccount !== lastKnownAccount) {
         callback(newAccount)
         clearInterval(interval)
-        watchAccountChanges(callback, newAccount);
+        watchAccountChanges(callback, newAccount)
       }
     })
   }, 1000)
@@ -104,8 +104,8 @@ export function watchNetwork(callbacks) {
     const blockNum = function() {
       web3.eth.getBlockNumber((err, blockNumber) => {
         if(err) console.log(err)
-        callbacks.blockNum(blockNumber);
-      });
+        callbacks.blockNum(blockNumber)
+      })
     }
     blockNum()
     setInterval(blockNum, 10 * 1000)
@@ -114,53 +114,53 @@ export function watchNetwork(callbacks) {
 }
 
 export function validateAddress(address) {
-  if(!address) return false;
-  if(address === '0x0000000000000000000000000000000000000000') return false;
-  if(address.substring(0, 2) !== "0x") return false;
+  if(!address) return false
+  if(address === "0x0000000000000000000000000000000000000000") return false
+  if(address.substring(0, 2) !== "0x") return false
 
   // Basic validation: length, valid characters, etc
-  if(!/^(0x)?[0-9a-f]{40}$/i.test(address)) return false;
+  if(!/^(0x)?[0-9a-f]{40}$/i.test(address)) return false
 
   // Checksum validation.
-  const raw = address.replace('0x','');
-  const allLowerCase = raw.toLowerCase() === raw;
-  const allUppercase = raw.toUpperCase() === raw;
+  const raw = address.replace("0x","")
+  const allLowerCase = raw.toLowerCase() === raw
+  const allUppercase = raw.toUpperCase() === raw
   if(allLowerCase || allUppercase) {
-    return true; // accepts addreses with no checksum data
+    return true // accepts addreses with no checksum data
   }
   else {
-    const checksum = ethjs.toChecksumAddress(address);
-    if(address !== checksum) return false;
+    const checksum = ethjs.toChecksumAddress(address)
+    if(address !== checksum) return false
   }
 
-  return true;
+  return true
 }
 
 export function addressHasChecksum(address) {
-  if(!module.exports.isValidAddress(address)) return false;
-  const raw = address.replace('0x','');
-  const allLowerCase = raw.toLowerCase() === raw;
-  const allUppercase = raw.toUpperCase() === raw;
-  return !(allLowerCase || allUppercase);
+  if(!module.exports.isValidAddress(address)) return false
+  const raw = address.replace("0x","")
+  const allLowerCase = raw.toLowerCase() === raw
+  const allUppercase = raw.toUpperCase() === raw
+  return !(allLowerCase || allUppercase)
 }
 
 export function verifySignature(json) {
   try {
-    const messageHash = ethjs.hashPersonalMessage(ethjs.toBuffer(json.msg));
-    const signedMessageDecoded = ethjs.fromRpcSig(json.sig);
-    const recoveredPublicKey = ethjs.ecrecover(messageHash, signedMessageDecoded.v, signedMessageDecoded.r, signedMessageDecoded.s);
-    const recoveredAddressBuffer = ethjs.pubToAddress(recoveredPublicKey);
-    const recoveredAddress = ethjs.bufferToHex(recoveredAddressBuffer);
-    return json.address === recoveredAddress;
+    const messageHash = ethjs.hashPersonalMessage(ethjs.toBuffer(json.msg))
+    const signedMessageDecoded = ethjs.fromRpcSig(json.sig)
+    const recoveredPublicKey = ethjs.ecrecover(messageHash, signedMessageDecoded.v, signedMessageDecoded.r, signedMessageDecoded.s)
+    const recoveredAddressBuffer = ethjs.pubToAddress(recoveredPublicKey)
+    const recoveredAddress = ethjs.bufferToHex(recoveredAddressBuffer)
+    return json.address === recoveredAddress
   }
   catch(err) {
-    return false;
+    return false
   }
 }
 export function signMessageWithMetamask(addr, message, callback) {
-  const msg = ethjs.bufferToHex(new Buffer(message, 'utf8'));
+  const msg = ethjs.bufferToHex(new Buffer(message, "utf8"))
   web3.currentProvider.sendAsync({
-    method: 'personal_sign',
+    method: "personal_sign",
     params: [msg, addr],
     addr
   }, function(err, res) {
@@ -168,25 +168,25 @@ export function signMessageWithMetamask(addr, message, callback) {
       address: addr,
       msg: message,
       sig: res.result,
-      version: '2'
-    });
-  });
+      version: "2"
+    })
+  })
 }
 
 function logger(req, res, next, end) {
   next((cb) => {
     // HACK: do not log known error when setting event log filters
     if (res.error && !res.error.message.includes("TypeError: Cannot read property 'filter' of undefined")) {
-      console.error('Error in RPC response:\n', res.error.message);
-    } else if (req.method === 'eth_sendTransaction') {
-      console.mineInfo('Sent transaction', res.result);
-    } else if (req.method === 'eth_getTransactionReceipt' && res.result) {
-      console.mineInfo('Mined transaction', res.result.transactionHash);
+      console.error("Error in RPC response:\n", res.error.message)
+    } else if (req.method === "eth_sendTransaction") {
+      console.mineInfo("Sent transaction", res.result)
+    } else if (req.method === "eth_getTransactionReceipt" && res.result) {
+      console.mineInfo("Mined transaction", res.result.transactionHash)
     }
-    cb();
+    cb()
   })
 }
 
 export function attachLogger() {
-  web3.currentProvider.rpcEngine._middleware.unshift(logger);
+  web3.currentProvider.rpcEngine._middleware.unshift(logger)
 }

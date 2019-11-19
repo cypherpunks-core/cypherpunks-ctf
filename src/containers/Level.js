@@ -1,12 +1,12 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import CodeComponent from '../components/Code';
-import Author from '../components/Author';
-import MarkdownComponent from '../components/Markdown';
-import * as actions from '../actions';
-import * as constants from '../constants';
-import Difficulty from '../components/Difficulty';
+import React from "react"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import CodeComponent from "../components/Code"
+import Author from "../components/Author"
+import MarkdownComponent from "../components/Markdown"
+import * as actions from "../actions"
+import * as constants from "../constants"
+import Difficulty from "../components/Difficulty"
 
 class Level extends React.Component {
 
@@ -16,7 +16,7 @@ class Level extends React.Component {
 
   componentWillUnmount() {
     if(this.props.activateLevel) {
-      this.props.deactivateLevel(this.props.activateLevel);
+      this.props.deactivateLevel(this.props.activateLevel)
     }
   }
 
@@ -30,7 +30,7 @@ class Level extends React.Component {
     const {
       level,
       levelCompleted
-    } = this.props;
+    } = this.props
 
     if(!level) return null
     const showCode = levelCompleted || level.revealCode
@@ -67,13 +67,13 @@ class Level extends React.Component {
 
         {/* COMPLETED DESCRIPTION */}
         { showCompletedDescription &&
-        <div style={{marginTop: '40px', marginBottom: '40px'}}>
+        <div style={{marginTop: "40px", marginBottom: "40px"}}>
           { completedDescription && <div className='well'><MarkdownComponent target={completedDescription}/></div> }
         </div>
         }
 
         {/* BUTTONS */}
-        <div className="" style={{marginTop: '5px'}}>
+        <div className="" style={{marginTop: "5px"}}>
 
           { level.levelContract &&
           <div className="">
@@ -115,7 +115,7 @@ class Level extends React.Component {
 
         {/* CODE */}
         { showCode && sourcesFile &&
-        <div style={{marginTop: '50px'}}>
+        <div style={{marginTop: "50px"}}>
           <div className='page-header'><h3>Sources</h3></div>
           <CodeComponent target={sourcesFile}/>
         </div>
@@ -127,7 +127,7 @@ class Level extends React.Component {
         }
 
       </div>
-    );
+    )
   }
 }
 
@@ -150,7 +150,7 @@ function mapStateToProps(state) {
     levels: state.gamedata.levels,
     levelCompleted: level && state.player.completedLevels[level.deployedAddress] > 0,
     levelEmitted: level && state.contracts.levels[level.deployedAddress] !== undefined
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -159,10 +159,10 @@ function mapDispatchToProps(dispatch) {
     deactivateLevel: actions.deactivateLevel,
     loadLevelInstance: actions.loadLevelInstance,
     submitLevelInstance: actions.submitLevelInstance,
-  }, dispatch);
+  }, dispatch)
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Level);
+)(Level)
