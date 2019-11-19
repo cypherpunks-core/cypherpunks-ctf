@@ -1,10 +1,9 @@
 pragma solidity ^0.4.18;
 
-import './levels/base/Level.sol';
-import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
+import "./levels/base/Level.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract Ethernaut is Ownable {
-
   // ----------------------------------
   // Owner interaction
   // ----------------------------------
@@ -32,7 +31,6 @@ contract Ethernaut is Ownable {
   event LevelCompletedLog(address indexed player, Level level);
 
   function createLevelInstance(Level _level) public payable {
-
     // Ensure level is registered.
     require(registeredLevels[_level]);
 
@@ -47,15 +45,13 @@ contract Ethernaut is Ownable {
   }
 
   function submitLevelInstance(address _instance) public {
-
     // Get player and level.
     EmittedInstanceData storage data = emittedInstances[_instance];
     require(data.player == msg.sender); // instance was emitted for this player
     require(data.completed == false); // not already submitted
 
     // Have the level check the instance.
-    if(data.level.validateInstance(_instance, msg.sender)) {
-
+    if (data.level.validateInstance(_instance, msg.sender)) {
       // Register instance as completed.
       data.completed = true;
 

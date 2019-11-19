@@ -1,10 +1,9 @@
 pragma solidity ^0.4.18;
 
 contract Instance {
-
   string public password;
   uint8 public infoNum = 42;
-  string public theMethodName = 'The method name is method7123949.';
+  string public theMethodName = "The method name is method7123949.";
   bool private cleared = false;
 
   // constructor
@@ -13,7 +12,7 @@ contract Instance {
   }
 
   function info() public pure returns (string) {
-    return 'You will find what you need in info1().';
+    return "You will find what you need in info1().";
   }
 
   function info1() public pure returns (string) {
@@ -21,22 +20,23 @@ contract Instance {
   }
 
   function info2(string param) public pure returns (string) {
-    if(keccak256(param) == keccak256('hello')) {
-      return 'The property infoNum holds the number of the next info method to call.';
+    if (keccak256(param) == keccak256("hello")) {
+      return
+        "The property infoNum holds the number of the next info method to call.";
     }
-    return 'Wrong parameter.';
+    return "Wrong parameter.";
   }
 
   function info42() public pure returns (string) {
-    return 'theMethodName is the name of the next method.';
+    return "theMethodName is the name of the next method.";
   }
 
   function method7123949() public pure returns (string) {
-    return 'If you know the password, submit it to authenticate().';
+    return "If you know the password, submit it to authenticate().";
   }
 
   function authenticate(string passkey) public {
-    if(keccak256(passkey) == keccak256(password)) {
+    if (keccak256(passkey) == keccak256(password)) {
       cleared = true;
     }
   }
