@@ -6,7 +6,7 @@ const ignore = [/node_modules/]
 let jsonCount = 0
 let jsonPass = 0
 
-function fromDir (startPath, filter, callback) {
+function fromDir(startPath, filter, callback) {
   if (!fs.existsSync(startPath)) {
     throw `Directory ${startPath} not found`
   }
@@ -34,8 +34,9 @@ function fromDir (startPath, filter, callback) {
   }
 }
 
-function jsonChecker (filename) {
-  console.log("Checking and auto formatting " + filename + "...")
+function jsonChecker(filename) {
+  // Use process.stdout.write to avoid trailing newline
+  process.stdout.write("Checking and auto formatting " + filename + ":")
   jsonCount += 1
   const content = fs.readFileSync(filename)
   try {
@@ -43,10 +44,10 @@ function jsonChecker (filename) {
     // Indent with 2 spaces
     const jsonObj = JSON.stringify(jsonContent, null, 2)
     fs.writeFileSync(filename, jsonObj)
-    console.log(chalk.green("Pass!"))
+    process.stdout.write(chalk.green(" Pass!\n"))
     jsonPass += 1
   } catch (err) {
-    console.log(chalk.red(err))   
+    console.log("\n" + chalk.red(err))   
   }
 }
 

@@ -4,7 +4,7 @@ contract University {
   address public owner;
   bool public combined = false;
   uint256 public time = now;
-  string public university_name = "National Chiao Tung University";
+  string public universityName = "National Chiao Tung University";
   bytes32[6] private name;
 
   function University(bytes32[6] _name) public {

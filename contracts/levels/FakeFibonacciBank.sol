@@ -27,7 +27,7 @@ contract FakeFibonacciBank {
   uint256 public calculatedFibNumber;
   uint256 public start = 3;
   uint256 public withdrawalCounter;
-  bytes4 constant fibSig = bytes4(sha3("setFibonacci(uint256)"));
+  bytes4 constant FIBSIG = bytes4(sha3("setFibonacci(uint256)"));
 
   constructor(address _fakeFibonacciLibrary) public payable {
     fakeFibonacciLibrary = _fakeFibonacciLibrary;
@@ -36,7 +36,7 @@ contract FakeFibonacciBank {
   function withdraw() {
     withdrawalCounter += 1;
     // calculate the fibonacci number for the current withdrawal user
-    require(fakeFibonacciLibrary.delegatecall(fibSig, withdrawalCounter));
+    require(fakeFibonacciLibrary.delegatecall(FIBSIG, withdrawalCounter));
     msg.sender.transfer(calculatedFibNumber * 0.001 ether);
   }
 

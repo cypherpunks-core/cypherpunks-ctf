@@ -24,7 +24,7 @@ contract("Recovery", function(accounts) {
   let player = accounts[0]
   let instance
 
-  before(async function () {
+  before(async function() {
     ethernaut = await Ethernaut.new()
     level = await RecoveryFactory.new()
     await ethernaut.registerLevel(level.address)
@@ -56,7 +56,7 @@ contract("Recovery", function(accounts) {
     assert.equal(await testInstance.name.call(), "test")
   })
 
-  it("should allow the player to solve the level", async function () {
+  it("should allow the player to solve the level", async function() {
     console.log("Check complete (should fail)...")
     let completed = await utils.submitLevelInstance(
       ethernaut,

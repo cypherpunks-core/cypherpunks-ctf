@@ -125,7 +125,7 @@ function needsDeploy(deployAddress) {
 }
 
 function initWeb3() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async(resolve, reject) => {
 
     const providerUrl = `${constants.ACTIVE_NETWORK.url}:${constants.ACTIVE_NETWORK.port}`
     console.log(colors.gray(`connecting web3 to '${providerUrl}'...`))
@@ -150,7 +150,7 @@ function loadDeployData(path) {
   try {
     return JSON.parse(fs.readFileSync(path, "utf8"))
   }
-  catch(err){
+  catch(err) {
     return {}
   }
 }

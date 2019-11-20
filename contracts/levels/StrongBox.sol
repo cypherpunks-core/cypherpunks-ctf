@@ -5,13 +5,13 @@ contract GuardLibrary {
 }
 
 contract StrongBox {
-  address public GuardLib;
+  address public guardLib;
 
   constructor(address _guardLibrary) public {
-    GuardLib = _guardLibrary;
+    guardLib = _guardLibrary;
   }
 
   function pass() public view returns (bool) {
-    return GuardLibrary(GuardLib).complete();
+    return GuardLibrary(guardLib).complete();
   }
 }

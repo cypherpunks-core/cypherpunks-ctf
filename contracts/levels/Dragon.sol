@@ -29,15 +29,15 @@ contract Dragon {
     require(msg.sender == _address);
 
     bytes20 addr = bytes20(_address);
-    bytes20 ft_blood = hex"00000000000000000000000000000000042b100d";
+    bytes20 ftBlood = hex"00000000000000000000000000000000042b100d";
     bytes20 mask = hex"000000000000000000000000000000000fffffff";
 
     for (uint256 i = 0; i < 34; i++) {
-      if (addr & mask == ft_blood) {
+      if (addr & mask == ftBlood) {
         dragonWings = true;
       }
       mask <<= 4;
-      ft_blood <<= 4;
+      ftBlood <<= 4;
     }
 
   }

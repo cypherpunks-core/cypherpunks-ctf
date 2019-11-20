@@ -64,7 +64,7 @@ window.addEventListener("load", async() => {
 
     // Initial web3 related actions
     store.dispatch(actions.connectWeb3(window.web3))
-    window.web3.eth.getAccounts(function (error, accounts) {
+    window.web3.eth.getAccounts(function(error, accounts) {
       let player
       if(accounts.length !== 0 && !error) player = accounts[0]
       store.dispatch(actions.setPlayerAddress(player))

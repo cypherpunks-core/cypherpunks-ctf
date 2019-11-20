@@ -18,10 +18,6 @@ contract FreeshopFactory is Level {
   {
     _player;
     Freeshop instance = Freeshop(_instance);
-    return instance.GetBalance() == 0 ether;
-  }
-
-  function GetBalance() public view returns (uint256) {
-    return address(this).balance;
+    return instance.getBalance() == 0 ether;
   }
 }

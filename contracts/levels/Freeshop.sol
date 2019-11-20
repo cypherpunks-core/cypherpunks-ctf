@@ -21,7 +21,7 @@ contract Freeshop {
     lastWithdrawTime[msg.sender] = now;
   }
 
-  function GetBalance() public view returns (uint256) {
+  function getBalance() public view returns (uint256) {
     return address(this).balance;
   }
 

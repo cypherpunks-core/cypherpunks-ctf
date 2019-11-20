@@ -61,7 +61,7 @@ export function fromWei(wei) {
 
 export function watchAccountChanges(callback, lastKnownAccount) {
   let interval = setInterval(function() {
-    web3.eth.getAccounts(function (error, accounts) {
+    web3.eth.getAccounts(function(error, accounts) {
       if(error) return console.log(error)
       const newAccount = accounts[0]
       if(newAccount !== lastKnownAccount) {

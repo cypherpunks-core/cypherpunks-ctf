@@ -41,7 +41,15 @@ module.exports = {
             "never"
         ],
         "no-console": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "space-before-function-paren": [
+          "error",
+          "never"
+        ],
+        "space-before-blocks": [
+          "error",
+          "always"
+        ]
     }
 }
 

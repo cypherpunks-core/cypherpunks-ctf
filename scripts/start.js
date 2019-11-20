@@ -40,7 +40,7 @@ var handleCompile
 // We only use this block for testing of Create React App itself:
 var isSmokeTest = process.argv.some(arg => arg.indexOf("--smoke-test") > -1)
 if (isSmokeTest) {
-  handleCompile = function (err, stats) {
+  handleCompile = function(err, stats) {
     if (err || stats.hasErrors() || stats.hasWarnings()) {
       process.exit(1)
     } else {
@@ -127,7 +127,7 @@ function setupCompiler(host, port, protocol) {
 // We need to provide a custom onError function for httpProxyMiddleware.
 // It allows us to log custom error messages on the console.
 function onProxyError(proxy) {
-  return function(err, req, res){
+  return function(err, req, res) {
     var host = req.headers && req.headers.host
     console.log(
       chalk.red("Proxy error:") + " Could not proxy request " + chalk.cyan(req.url) +
