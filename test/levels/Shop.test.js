@@ -1,14 +1,14 @@
-const ShopFactory = artifacts.require('./levels/ShopFactory.sol')
-const ShopAttack = artifacts.require('./attacks/ShopAttack.sol')
-const Shop = artifacts.require('./levels/Shop.sol')
+const ShopFactory = artifacts.require("./levels/ShopFactory.sol")
+const ShopAttack = artifacts.require("./attacks/ShopAttack.sol")
+const Shop = artifacts.require("./levels/Shop.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('Shop', function(accounts) {
+contract("Shop", function(accounts) {
 
   let ethernaut
   let level
@@ -19,9 +19,9 @@ contract('Shop', function(accounts) {
     ethernaut = await Ethernaut.new()
     level = await ShopFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should fail if the player didnt solve the level', async function() {
+  it("should fail if the player didnt solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, Shop)
     const completed = await utils.submitLevelInstance(
       ethernaut,
@@ -31,9 +31,9 @@ contract('Shop', function(accounts) {
     )
 
     assert.isFalse(completed)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, Shop)
 
     const attacker = await ShopAttack.new()
@@ -47,5 +47,5 @@ contract('Shop', function(accounts) {
     )
 
     assert.isTrue(completed)
-  });
-});
+  })
+})

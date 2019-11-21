@@ -1,10 +1,10 @@
-import React from 'react';
-import Sidebar from 'react-sidebar';
-import Header from './Header';
-import SidebarContent from './Sidebar';
-import FontAwesome from 'react-fontawesome';
-import ReactGA from 'react-ga'
-import * as constants from '../constants'
+import React from "react"
+import Sidebar from "react-sidebar"
+import Header from "./Header"
+import SidebarContent from "./Sidebar"
+import FontAwesome from "react-fontawesome"
+import ReactGA from "react-ga"
+import * as constants from "../constants"
 
 class App extends React.Component {
 
@@ -12,8 +12,8 @@ class App extends React.Component {
     super()
 
     // Analytics
-    ReactGA.initialize(constants.GOOGLE_ANALYTICS_ID);
-    ReactGA.pageview(window.location.pathname);
+    ReactGA.initialize(constants.GOOGLE_ANALYTICS_ID)
+    ReactGA.pageview(window.location.pathname)
   }
 
   componentDidUpdate(prevProps) {
@@ -24,16 +24,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ fontFamily: '"Helvetica Neue", Lato, sans-serif'}}>
+      <div style={{ fontFamily: "\"Helvetica Neue\", Lato, sans-serif"}}>
         <Header/>
 
         {/* SPLIT VIEW */}
         <Sidebar
-          sidebar={<div style={{ width: '205px' }}><SidebarContent/></div>}
+          sidebar={<div style={{ width: "205px" }}><SidebarContent/></div>}
           transitions={false}
           docked={true}
           shadow={false}
-          styles={{ root: { top: 62, bottom: 20 }, sidebar: { backgroundColor: '#e5f2fb', boxShadow: 'none' }, content: { overflowX: 'hidden' }}}
+          styles={{ root: { top: 62, bottom: 20 }, sidebar: { backgroundColor: "#e5f2fb", boxShadow: "none" }, content: { overflowX: "hidden" }}}
         >
           <div ref={el => this.childrenElement = el}>
             {this.props.children}
@@ -46,8 +46,8 @@ class App extends React.Component {
         </footer>
 
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

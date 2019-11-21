@@ -1,16 +1,16 @@
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-const PreservationFactory = artifacts.require('./levels/PreservationFactory.sol')
-const Preservation = artifacts.require('./levels/Preservation.sol')
-const PreservationAttack = artifacts.require('./attacks/PreservationAttack.sol')
+const PreservationFactory = artifacts.require("./levels/PreservationFactory.sol")
+const Preservation = artifacts.require("./levels/Preservation.sol")
+const PreservationAttack = artifacts.require("./attacks/PreservationAttack.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
 const BN = require("bignumber.js")
 
-contract('Preservation', function(accounts) {
+contract("Preservation", function(accounts) {
 
   let ethernaut
   let level
@@ -19,13 +19,13 @@ contract('Preservation', function(accounts) {
   let instance = undefined
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await PreservationFactory.new()
     await ethernaut.registerLevel(level.address)
-    instance = await utils.createLevelInstance(ethernaut, level.address, player, Preservation);
-  });
+    instance = await utils.createLevelInstance(ethernaut, level.address, player, Preservation)
+  })
 
-  it('should not be immediately solveable', async function() {
+  it("should not be immediately solveable", async function() {
 
     // Factory check
     const ethCompleted = await utils.submitLevelInstance(
@@ -34,10 +34,10 @@ contract('Preservation', function(accounts) {
       instance.address,
       player
     )
-    assert.equal(ethCompleted, false);
-  });
+    assert.equal(ethCompleted, false)
+  })
 
-  it('the second function should always be able to modify state, regardless of user input', async function() {
+  it("the second function should always be able to modify state, regardless of user input", async function() {
 
     // send some random times
     await instance.setFirstTime(26)
@@ -51,15 +51,15 @@ contract('Preservation', function(accounts) {
     assert.equal(adjustedAddress, 1)
   })
 
-  it('the level should be solveable', async function() {
+  it("the level should be solveable", async function() {
    
-    const AttackContract = await PreservationAttack.new(); 
+    const AttackContract = await PreservationAttack.new() 
     // convert the address to a uint 
-    let attackAddressNumber = new BN(AttackContract.address,16); 
+    let attackAddressNumber = new BN(AttackContract.address,16) 
     // set the attack contract as the first time library
     await instance.setSecondTime(attackAddressNumber)
     // set the player address to an integer 
-    let playerAddressNumber = new BN(player,16);  
+    let playerAddressNumber = new BN(player,16)  
     // set the player as the owner
     await instance.setFirstTime(playerAddressNumber)
 
@@ -75,6 +75,6 @@ contract('Preservation', function(accounts) {
       player
     )
     assert.equal(ethCompleted, true)
-  });
+  })
 
-});
+})

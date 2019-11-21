@@ -1,14 +1,14 @@
-const Telephone = artifacts.require('./levels/Telephone.sol')
-const TelephoneFactory = artifacts.require('./levels/TelephoneFactory.sol')
-const TelephoneAttack = artifacts.require('./attacks/TelephoneAttack.sol')
+const Telephone = artifacts.require("./levels/Telephone.sol")
+const TelephoneFactory = artifacts.require("./levels/TelephoneFactory.sol")
+const TelephoneAttack = artifacts.require("./attacks/TelephoneAttack.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('Telephone', function(accounts) {
+contract("Telephone", function(accounts) {
 
   let ethernaut
   let level
@@ -16,12 +16,12 @@ contract('Telephone', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await TelephoneFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should fail if the player did not solve the level', async function() {
+  it("should fail if the player did not solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, Telephone)
 
     const completed = await utils.submitLevelInstance(
@@ -32,10 +32,10 @@ contract('Telephone', function(accounts) {
     )
 
     assert.isFalse(completed)
-  });
+  })
 
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, Telephone)
 
     const attacker = await TelephoneAttack.new()
@@ -49,6 +49,6 @@ contract('Telephone', function(accounts) {
     )
     
     assert.isTrue(completed)
-  });
+  })
 
-});
+})

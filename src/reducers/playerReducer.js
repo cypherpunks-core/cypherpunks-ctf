@@ -1,5 +1,5 @@
-import * as actions from '../actions'
-import * as constants from '../constants'
+import * as actions from "../actions"
+import * as constants from "../constants"
 
 const initialState = {
   address: undefined,
@@ -8,47 +8,47 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-  let newState;
+  let newState
   switch(action.type) {
 
-    case actions.CHECK_ALL_COMPLETED:
-      newState = {
-        ...state,
-        allLevelsCompleted: action.allCompleted
+  case actions.CHECK_ALL_COMPLETED:
+    newState = {
+      ...state,
+      allLevelsCompleted: action.allCompleted
+    }
+    break
+
+  case actions.SET_PLAYER_ADDRESS:
+    newState = restorePlayer(action.address) || { ...state, address: action.address }
+    break
+
+  case actions.LOAD_LEVEL_INSTANCE:
+    newState = {
+      ...state,
+      emittedLevels: {
+        ...state.emittedLevels,
+        [action.level.deployedAddress]: action.instance.address
       }
-      break
+    }
+    cachePlayer(newState)
+    break
 
-    case actions.SET_PLAYER_ADDRESS:
-      newState = restorePlayer(action.address) || { ...state, address: action.address }
-      break
-
-    case actions.LOAD_LEVEL_INSTANCE:
+  case actions.SUBMIT_LEVEL_INSTANCE:
+    if(action.completed) {
       newState = {
         ...state,
-        emittedLevels: {
-          ...state.emittedLevels,
-          [action.level.deployedAddress]: action.instance.address
+        completedLevels: {
+          ...state.completedLevels,
+          [action.level.deployedAddress]: action.completed
         }
       }
       cachePlayer(newState)
-      break
+    }
+    else newState = state
+    break
 
-    case actions.SUBMIT_LEVEL_INSTANCE:
-      if(action.completed) {
-        newState = {
-          ...state,
-          completedLevels: {
-            ...state.completedLevels,
-            [action.level.deployedAddress]: action.completed
-          }
-        }
-        cachePlayer(newState)
-      }
-      else newState = state
-      break
-
-    default:
-      newState = state;
+  default:
+    newState = state
   }
   return newState
 }

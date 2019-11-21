@@ -6,7 +6,7 @@
 * [參考資料](#參考資料)
 
 ## 專案管理
-1. 每個項目盡量開成 github issue 以方便追蹤
+1. 每個項目如開發週期較長，盡量開成 github issue 以方便追蹤
    1. 將 Assignees 填上自己
    1. 指定 label
       * 分類：`feature`, `bugfix`, `hotfix`, `doc`
@@ -16,10 +16,10 @@
    * feature/bugfix: 主幹為 `dev`
    * branch name: `{type}-{number}-{description}`
       * `type`: feature, bugfix, hotfix, doc
-      * `number`: github issue number
+      * `number`: github issue number (If have a corresponding issue)
       * `description`: 關鍵字
       * example: `feature-123-new-level-levelname`
-2. 把branch push 到**自己**的 repo (例如 `HappyFeet007/cypherpunks-ctf`)
+2. 把branch push 到**自己**的 repo (例如 `HappyFeet07/cypherpunks-ctf`)
 3. coding... (只要有 commit 就 push，以免 local 電腦損壞)
 4. 建 Pull request (github 上只要有一個 commit 就可以建 PR)
    * PR name: 一句話敘述要做什麼事，這句話會是將來 merge 時的 log ([How to Write a Git Commit Message)
@@ -37,6 +37,7 @@
 * Coding style: 
    * 縮排為兩個空格
    * [Solidity](https://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
+   * Pull request 前執行`npm run lint`，並通過其檢驗
 
 ## 參考資料
 1. [How to write a git commit message](https://chris.beams.io/posts/git-commit/)

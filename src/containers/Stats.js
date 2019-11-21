@@ -1,18 +1,18 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import * as actions from '../actions'
-import _ from 'lodash'
+import React from "react"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import * as actions from "../actions"
+import _ from "lodash"
 
-import '../styles/page.css'
+import "../styles/page.css"
 
 class Stats extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      playerFilter: '',
-      levelFilter: '',
+      playerFilter: "",
+      levelFilter: "",
     }
   }
 
@@ -21,10 +21,10 @@ class Stats extends React.Component {
   }
 
   filter(player, level) {
-    if(this.state.playerFilter !== '' && player !== '') {
+    if(this.state.playerFilter !== "" && player !== "") {
       if(player !== this.state.playerFilter) return false
     }
-    if(this.state.levelFilter !== '' && level !== '') {
+    if(this.state.levelFilter !== "" && level !== "") {
       if(level !== this.state.levelFilter) return false
     }
     return true
@@ -40,7 +40,7 @@ class Stats extends React.Component {
   }
 
   getNumPlayers() {
-    const players = _.uniq(_.map(this.props.createdInstances, 'args.player'))
+    const players = _.uniq(_.map(this.props.createdInstances, "args.player"))
     // console.log(`players:`, players)
     return players.length
   }
@@ -73,7 +73,7 @@ class Stats extends React.Component {
         </div>
 
         {/* ACTIONS */}
-        <div style={{margin: '0 0 20px 0'}}>
+        <div style={{margin: "0 0 20px 0"}}>
           <button
             type="button"
             className="btn btn-xs btn-primary"
@@ -99,25 +99,25 @@ class Stats extends React.Component {
           <strong># completed: {this.props.completedLevels.length}</strong>
           <table className="table">
             <thead>
-            <tr>
-              <th>Player</th>
-              <th>Level name</th>
-              <th>Level address</th>
-              <th>Block num</th>
-            </tr>
+              <tr>
+                <th>Player</th>
+                <th>Level name</th>
+                <th>Level address</th>
+                <th>Block num</th>
+              </tr>
             </thead>
             <tbody>
-            {_.map(this.props.completedLevels, item => {
-              if(!this.filter(item.args.player, item.args.level)) return
-              return (
-                <tr key={item.transactionHash}>
-                  <td><small>{item.args.player}</small></td>
-                  <td><small>{this.getLevelName(item.args.level)}</small></td>
-                  <td><small>{this.compactAddress(item.args.level)}</small></td>
-                  <td><small>{item.blockNumber}</small></td>
-                </tr>
-              )
-            })}
+              {_.map(this.props.completedLevels, item => {
+                if(!this.filter(item.args.player, item.args.level)) return
+                return (
+                  <tr key={item.transactionHash}>
+                    <td><small>{item.args.player}</small></td>
+                    <td><small>{this.getLevelName(item.args.level)}</small></td>
+                    <td><small>{this.compactAddress(item.args.level)}</small></td>
+                    <td><small>{item.blockNumber}</small></td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
@@ -128,21 +128,21 @@ class Stats extends React.Component {
           <strong># created: {this.props.createdInstances.length}</strong>
           <table className="table">
             <thead>
-            <tr>
-              <th>Player</th>
-              <th>Instance</th>
-            </tr>
+              <tr>
+                <th>Player</th>
+                <th>Instance</th>
+              </tr>
             </thead>
             <tbody>
-            {_.map(this.props.createdInstances, item => {
-              if(!this.filter(item.args.player, '')) return
-              return (
-                <tr key={item.transactionHash}>
-                  <td><small>{item.args.player}</small></td>
-                  <td><small>{this.compactAddress(item.args.instance)}</small></td>
-                </tr>
-              )
-            })}
+              {_.map(this.props.createdInstances, item => {
+                if(!this.filter(item.args.player, "")) return
+                return (
+                  <tr key={item.transactionHash}>
+                    <td><small>{item.args.player}</small></td>
+                    <td><small>{this.compactAddress(item.args.instance)}</small></td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

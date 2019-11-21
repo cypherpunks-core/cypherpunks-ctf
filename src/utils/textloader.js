@@ -10,7 +10,7 @@ export default function load(data) {
         })
     }
     catch(error) {
-      console.log(`ERROR LOADING FILE:`, error)
+      console.log("ERROR LOADING FILE:", error)
       reject(error)
     }
   })

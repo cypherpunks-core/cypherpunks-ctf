@@ -1,15 +1,15 @@
 
-const ForceFactory = artifacts.require('./levels/ForceFactory.sol')
-const ForceAttack = artifacts.require('./attacks/ForceAttack.sol')
-const Force = artifacts.require('./levels/Force.sol')
+const ForceFactory = artifacts.require("./levels/ForceFactory.sol")
+const ForceAttack = artifacts.require("./attacks/ForceAttack.sol")
+const Force = artifacts.require("./levels/Force.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('Force', function(accounts) {
+contract("Force", function(accounts) {
 
   let ethernaut
   let level
@@ -17,14 +17,14 @@ contract('Force', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await ForceFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
 
-    const instance = await utils.createLevelInstance(ethernaut, level.address, player, Force);
+    const instance = await utils.createLevelInstance(ethernaut, level.address, player, Force)
 
     // Check init balances
     let balance = await utils.getBalance(web3, instance.address)
@@ -36,7 +36,7 @@ contract('Force', function(accounts) {
       toPromise(web3.eth.sendTransaction)({
         from: player,
         to: instance.address,
-        value: web3.toWei(0.01, 'ether')
+        value: web3.toWei(0.01, "ether")
       }) 
     )
       
@@ -47,7 +47,7 @@ contract('Force', function(accounts) {
     // Attack
     const attacker = await ForceAttack.new({
       from: player,
-      value: web3.toWei(0.01, 'ether')
+      value: web3.toWei(0.01, "ether")
     })
     await attacker.attack(instance.address)
 
@@ -65,6 +65,6 @@ contract('Force', function(accounts) {
     )
     assert.equal(ethCompleted, true)
 
-  });
+  })
 
-});
+})

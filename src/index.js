@@ -1,26 +1,26 @@
-require('./utils/^^');
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { store } from './store';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
-import { Router, Route, IndexRoute } from 'react-router';
+require("./utils/^^")
+import React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import { store } from "./store"
+import { syncHistoryWithStore } from "react-router-redux"
+import { browserHistory } from "react-router"
+import { Router, Route, IndexRoute } from "react-router"
 
-import * as ethutil from './utils/ethutil'
-import * as actions from './actions'
-import * as constants from './constants'
+import * as ethutil from "./utils/ethutil"
+import * as actions from "./actions"
+import * as constants from "./constants"
 
-import App from './containers/App';
-import Home from './containers/Home';
-import Level from './containers/Level';
-import Help from './containers/Help';
-import Stats from './containers/Stats';
-import NotFound404 from './components/NotFound404';
+import App from "./containers/App"
+import Home from "./containers/Home"
+import Level from "./containers/Level"
+import Help from "./containers/Help"
+import Stats from "./containers/Stats"
+import NotFound404 from "./components/NotFound404"
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './styles/app.css';
+import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/css/bootstrap-theme.css"
+import "./styles/app.css"
 
 // Initial actions
 store.dispatch(actions.loadGamedata())
@@ -38,11 +38,11 @@ ReactDOM.render(
       </Route>
     </Router>
   </Provider>,
-  document.getElementById('root')
-);
+  document.getElementById("root")
+)
 
 // Post-load actions.
-window.addEventListener('load', async() => {
+window.addEventListener("load", async() => {
 
   if (window.ethereum) {
     window.web3 = new constants.Web3(window.ethereum)
@@ -50,7 +50,7 @@ window.addEventListener('load', async() => {
       await window.ethereum.enable()
     } catch (error) {
       console.error(error)
-      console.error(`Refresh the page to approve/reject again`)
+      console.error("Refresh the page to approve/reject again")
       window.web3 = null
     }
   } else if(window.web3) {
@@ -64,8 +64,8 @@ window.addEventListener('load', async() => {
 
     // Initial web3 related actions
     store.dispatch(actions.connectWeb3(window.web3))
-    window.web3.eth.getAccounts(function (error, accounts) {
-      let player;
+    window.web3.eth.getAccounts(function(error, accounts) {
+      let player
       if(accounts.length !== 0 && !error) player = accounts[0]
       store.dispatch(actions.setPlayerAddress(player))
       store.dispatch(actions.loadEthernautContract())
@@ -86,7 +86,7 @@ window.addEventListener('load', async() => {
       })
     })
   }
-});
+})
 
 function checkWrongNetwork(id) {
 
@@ -100,7 +100,7 @@ function checkWrongNetwork(id) {
 
   if(onWrongNetwork) {
     console.error(`Heads up, you're on the wrong network!! @bad Please switch to the << ${constants.ACTIVE_NETWORK.name.toUpperCase()} >> network.`)
-    console.error(`1) From November 2 you can turn on privacy mode (off by default) in settings if you don't want to expose your info by default. 2) If privacy mode is turn on you have to authorized metamask to use this page. 3) then refresh.`)
+    console.error("1) From November 2 you can turn on privacy mode (off by default) in settings if you don't want to expose your info by default. 2) If privacy mode is turn on you have to authorized metamask to use this page. 3) then refresh.")
   }
 
   return onWrongNetwork

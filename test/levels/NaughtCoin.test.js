@@ -1,14 +1,14 @@
-const NaughtCoin = artifacts.require('./levels/NaughtCoin.sol')
-const NaughtCoinFactory = artifacts.require('./levels/NaughtCoinFactory.sol')
-const NaughtCoinAttack = artifacts.require('./attacks/NaughtCoinAttack.sol')
+const NaughtCoin = artifacts.require("./levels/NaughtCoin.sol")
+const NaughtCoinFactory = artifacts.require("./levels/NaughtCoinFactory.sol")
+const NaughtCoinAttack = artifacts.require("./attacks/NaughtCoinAttack.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('NaughtCoin', function(accounts) {
+contract("NaughtCoin", function(accounts) {
 
   let ethernaut
   let level
@@ -16,12 +16,12 @@ contract('NaughtCoin', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await NaughtCoinFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should fail if the player did not solve the level', async function() {
+  it("should fail if the player did not solve the level", async function() {
     const instance = await utils.createLevelInstance(ethernaut, level.address, player, NaughtCoin)
 
     const completed = await utils.submitLevelInstance(
@@ -32,19 +32,19 @@ contract('NaughtCoin', function(accounts) {
     )
 
     assert.isFalse(completed)
-  });
+  })
 
 
-  it('should allow the player to solve the level', async function() {
-    const instance = await utils.createLevelInstance(ethernaut, level.address, player, NaughtCoin);
-    const attacker = await NaughtCoinAttack.new();
+  it("should allow the player to solve the level", async function() {
+    const instance = await utils.createLevelInstance(ethernaut, level.address, player, NaughtCoin)
+    const attacker = await NaughtCoinAttack.new()
 
     // Allow the contract to call transfer tokens on your behalf, transferFrom has a different implementation to transfer, so it will be allowed
-    let balance = await instance.balanceOf(player); 
-    await instance.approve(attacker.address, balance);
+    let balance = await instance.balanceOf(player) 
+    await instance.approve(attacker.address, balance)
 
     // Transfer the tokens out
-    await attacker.attack(instance.address, player);
+    await attacker.attack(instance.address, player)
 
     const completed = await utils.submitLevelInstance(
       ethernaut,
@@ -54,6 +54,6 @@ contract('NaughtCoin', function(accounts) {
     )
     
     assert.isTrue(completed)
-  });
+  })
 
-});
+})

@@ -1,14 +1,14 @@
-const Reentrance = artifacts.require('./levels/Reentrance.sol')
-const ReentranceFactory = artifacts.require('./levels/ReentranceFactory.sol')
-const ReentranceAttack = artifacts.require('./attacks/ReentranceAttack.sol')
+const Reentrance = artifacts.require("./levels/Reentrance.sol")
+const ReentranceFactory = artifacts.require("./levels/ReentranceFactory.sol")
+const ReentranceAttack = artifacts.require("./attacks/ReentranceAttack.sol")
 
-const Ethernaut = artifacts.require('./Ethernaut.sol')
+const Ethernaut = artifacts.require("./Ethernaut.sol")
 
-import * as utils from '../utils/TestUtils'
-import expectThrow from 'zeppelin-solidity/test/helpers/expectThrow'
-import toPromise from 'zeppelin-solidity/test/helpers/toPromise'
+import * as utils from "../utils/TestUtils"
+import expectThrow from "zeppelin-solidity/test/helpers/expectThrow"
+import toPromise from "zeppelin-solidity/test/helpers/toPromise"
 
-contract('Reentrance', function(accounts) {
+contract("Reentrance", function(accounts) {
 
   let ethernaut
   let level
@@ -16,50 +16,50 @@ contract('Reentrance', function(accounts) {
   let player = accounts[0]
 
   before(async function() {
-    ethernaut = await Ethernaut.new();
+    ethernaut = await Ethernaut.new()
     level = await ReentranceFactory.new()
     await ethernaut.registerLevel(level.address)
-  });
+  })
 
-  it('should allow the player to solve the level', async function() {
+  it("should allow the player to solve the level", async function() {
 
     const insertCoin = web3.fromWei(
-      (await level.insertCoin.call()).toNumber(), 'ether'
+      (await level.insertCoin.call()).toNumber(), "ether"
     )
-    console.log(`level insertCoin:`, insertCoin)
+    console.log("level insertCoin:", insertCoin)
 
     const instance = await utils.createLevelInstance(
       ethernaut, level.address, player, Reentrance,
-      {from: player, value: web3.toWei(insertCoin, 'ether')}
+      {from: player, value: web3.toWei(insertCoin, "ether")}
     )
 
     // Query contract balance (should be 0.1)
     let instanceBalance = await utils.getBalance(web3, instance.address)
-    console.log(`init instance balance:`, instanceBalance)
+    console.log("init instance balance:", instanceBalance)
     assert.equal(instanceBalance, insertCoin)
 
     // Deploy attacker contract
     const attackerFunds = 0.01
     const attacker = await ReentranceAttack.new(instance.address, {
-      value: web3.toWei(attackerFunds, 'ether')
+      value: web3.toWei(attackerFunds, "ether")
     })
 
     // Check attacker balance
     let attackerBalance = await utils.getBalance(web3, attacker.address)
-    console.log(`init attacker balance:`, attackerBalance)
+    console.log("init attacker balance:", attackerBalance)
     assert.equal(attackerBalance, attackerFunds)
 
     // '(◣_◢)'
     await attacker.attack_1_causeOverflow()
     attackerBalance = await utils.getBalance(web3, attacker.address)
-    console.log(`post attacker balance 1:`, attackerBalance)
+    console.log("post attacker balance 1:", attackerBalance)
     await attacker.attack_2_deplete()
     attackerBalance = await utils.getBalance(web3, attacker.address)
-    console.log(`post attacker balance 2:`, attackerBalance)
+    console.log("post attacker balance 2:", attackerBalance)
 
     // Query balance
     instanceBalance = await utils.getBalance(web3, instance.address)
-    console.log(`post instance balance:`, instanceBalance)
+    console.log("post instance balance:", instanceBalance)
     assert.equal(instanceBalance, 0)
 
     // Factory check
@@ -70,6 +70,6 @@ contract('Reentrance', function(accounts) {
       player
     )
     assert.equal(ethCompleted, true)
-  });
+  })
 
-});
+})

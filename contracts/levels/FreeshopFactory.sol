@@ -1,10 +1,9 @@
 pragma solidity ^0.4.24;
 
-import './base/Level.sol';
-import './Freeshop.sol';
+import "./base/Level.sol";
+import "./Freeshop.sol";
 
 contract FreeshopFactory is Level {
-
   function createInstance(address _player) public payable returns (address) {
     _player;
     require(msg.value >= 1 ether);
@@ -13,13 +12,12 @@ contract FreeshopFactory is Level {
     return nowinstance;
   }
 
-  function validateInstance(address _instance, address _player) public returns (bool) {
+  function validateInstance(address _instance, address _player)
+    public
+    returns (bool)
+  {
     _player;
     Freeshop instance = Freeshop(_instance);
-    return instance.GetBalance() == 0 ether;
-  }
-  
-  function GetBalance() public view returns(uint) {
-    return address(this).balance;
+    return instance.getBalance() == 0 ether;
   }
 }
