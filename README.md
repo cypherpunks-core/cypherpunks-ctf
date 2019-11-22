@@ -1,4 +1,5 @@
 # Cypherpunks CTF
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 <p>Cypherpunks CTF is a Web3/Solidity based wargame inspired in <a href="https://ethernaut.openzeppelin.com" target="_blank" rel="noopener noreferred">Ethernaut</a>, to be played in the Ethereum Virtual Machine. Each level is a smart contract that needs to be 'hacked'.</p>
 
@@ -49,3 +50,19 @@ Let's suppose that we are creating a level.
 8. Verify that the level is playable and winnable via UI. It is common for levels to be beatable in some way in tests that doesn't work using the UI, so it is important to test it manually as well.
 9. Add a completed description markdown file, in gamedata/levels/ (make sure gamedata.json points to it). The level will display this as additional info once the level is solved, usually to include historical information related to the level.
 10. Make a PR request so that we can re-deploy the game with the new level!
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/HappyFeet07"><img src="https://avatars1.githubusercontent.com/u/34086197?v=4" width="100px;" alt="HappyFeet07"/><br /><sub><b>HappyFeet07</b></sub></a><br /><a href="https://github.com/cypherpunks-core/cypherpunks-ctf/commits?author=HappyFeet07" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
