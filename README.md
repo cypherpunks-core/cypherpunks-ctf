@@ -59,6 +59,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/StillFantastic"><img src="https://avatars3.githubusercontent.com/u/28007209?v=4" width="100px;" alt="Bill Hsu"/><br /><sub><b>Bill Hsu</b></sub></a><br /><a href="https://github.com/cypherpunks-core/cypherpunks-ctf/commits?author=StillFantastic" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/boyuchen0224"><img src="https://avatars2.githubusercontent.com/u/26523039?v=4" width="100px;" alt="boyuchen"/><br /><sub><b>boyuchen</b></sub></a><br /><a href="https://github.com/cypherpunks-core/cypherpunks-ctf/commits?author=boyuchen0224" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/HappyFeet07"><img src="https://avatars1.githubusercontent.com/u/34086197?v=4" width="100px;" alt="HappyFeet07"/><br /><sub><b>HappyFeet07</b></sub></a><br /><a href="https://github.com/cypherpunks-core/cypherpunks-ctf/commits?author=HappyFeet07" title="Code">💻</a></td>
   </tr>
 </table>
