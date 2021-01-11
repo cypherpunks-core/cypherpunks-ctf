@@ -46,8 +46,12 @@ window.addEventListener("load", async() => {
 
   if (window.ethereum) {
     window.web3 = new constants.Web3(window.ethereum)
+    window.ethereum.autoRefreshOnNetworkChange = false
+    window.ethereum.on("chainChanged", () => {
+      document.location.reload()
+    })
     try {
-      await window.ethereum.enable()
+      await window.ethereum.request({method: "eth_requestAccounts"})
     } catch (error) {
       console.error(error)
       console.error("Refresh the page to approve/reject again")
